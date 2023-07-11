@@ -1,0 +1,20 @@
+{
+    "name": "ali/spreadgroups",
+    "description": "Solution for solving Spread groups challenge.",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^10.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Spreadgroups\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali Falahati",
+            "email": "ali.falahati.2010@gmail.com"
+        }
+    ]
+}
