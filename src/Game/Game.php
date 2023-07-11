@@ -29,28 +29,26 @@ class Game
      */
     public function playGame(): void
     {
-        $knightsCount = count($this->knights);
+        while (count($this->knights) > 1) {
+            $aliveKnights = $this->getAliveKnights();
 
-        while ($knightsCount > 1) {
-            for ($i = 0; $i < $knightsCount; $i++) {
-                $currentKnight = $this->knights[$i];
-                if (!$currentKnight->isAlive()) {
-                    continue;
-                }
+            foreach ($aliveKnights as $index => $currentKnight) {
 
-                $nextIndex = ($i + 1) % $knightsCount;
-                while (!$this->knights[$nextIndex]->isAlive()) {
-                    $nextIndex = ($nextIndex + 1) % $knightsCount;
-                }
+                // ensure that the index $nextIndex stays within the bounds of the $aliveKnights array.
+                $nextIndex = ($index + 1) % count($aliveKnights);
 
-                $nextKnight = $this->knights[$nextIndex];
+                $nextKnight = $aliveKnights[$nextIndex];
 
                 $diceRoll = random_int(1, 6);
                 $nextKnight->takeDamage($diceRoll);
+
+                if (!$nextKnight->isAlive()) {
+                    unset($aliveKnights[$nextIndex]);
+                    $aliveKnights = array_values($aliveKnights);
+                }
             }
 
-            $this->knights = $this->getAliveKnights();
-            $knightsCount = count($this->knights);
+            $this->knights = $aliveKnights;
         }
     }
 
