@@ -6,7 +6,6 @@ class Game
 {
     public function __construct(private array $knights = [])
     {
-        $this->knights = [];
     }
 
     public function addKnight(Knight $knight): void
