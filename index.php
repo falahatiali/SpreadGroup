@@ -9,13 +9,13 @@ use Spreadgroups\Game\Knight;
 $game = new Game();
 
 // Add knights to the game
-$game->addKnight(new Knight(1, 100));
-$game->addKnight(new Knight(2, 100));
-$game->addKnight(new Knight(3, 100));
-$game->addKnight(new Knight(4, 100));
-$game->addKnight(new Knight(5, 100));
-$game->addKnight(new Knight(6, 100));
-$game->addKnight(new Knight(7, 100));
+$game->addKnight(new Knight(1, 10));
+$game->addKnight(new Knight(2, 10));
+$game->addKnight(new Knight(3, 10));
+$game->addKnight(new Knight(4, 10));
+$game->addKnight(new Knight(5, 10));
+$game->addKnight(new Knight(6, 10));
+$game->addKnight(new Knight(7, 10));
 // Add more knights as needed
 
 // Start the game simulation
