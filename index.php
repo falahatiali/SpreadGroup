@@ -16,17 +16,10 @@ $game->addKnight(new Knight(4, 10));
 $game->addKnight(new Knight(5, 10));
 $game->addKnight(new Knight(6, 10));
 $game->addKnight(new Knight(7, 10));
-// Add more knights as needed
+$game->addKnight(new Knight(8, 10));
+$game->addKnight(new Knight(9, 10));
+$game->addKnight(new Knight(10, 10));
 
-// Start the game simulation
-$game->playGame();
+$winner = $game->playGame();
 
-// Get the winner of the game
-$winner = $game->getWinner();
-
-// Output the winner's identifier or information
-if ($winner) {
-    echo "The winner is Knight " . $winner->getId() . "!";
-} else {
-    echo "No winner found. It's a draw!";
-}
+echo "The winner is Knight " . $winner->getId() . "!";
