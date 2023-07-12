@@ -10,11 +10,18 @@ class Game
     {
     }
 
+    /**
+     * @param Knight $knight
+     */
     public function addKnight(Knight $knight): void
     {
         $this->knights[] = $knight;
     }
 
+    /**
+     * This method returns the list of alive knights.
+     * @return array
+     */
     public function getAliveKnights(): array
     {
         return array_filter($this->knights, function (Knight $knight) {
@@ -45,7 +52,7 @@ class Game
                     $diceRoll = random_int(1, 6);
                     $nextKnight->takeDamage($diceRoll);
 
-                    if ($this->isSingleAliveKnight()){
+                    if ($this->isSingleAliveKnight()) {
                         break;
                     }
                 }
@@ -55,7 +62,11 @@ class Game
         return $this->getWinner();
     }
 
-    function isSingleAliveKnight(): bool
+    /**
+     * Check if there is only one knight alive.
+     * @return bool
+     */
+    public function isSingleAliveKnight(): bool
     {
         $count = count(array_filter($this->knights, fn(Knight $knight) => $knight->isAlive()));
 
@@ -66,7 +77,11 @@ class Game
         return false;
     }
 
-    function getWinner(): Knight
+    /**
+     * @return Knight
+     * @throws Exception
+     */
+    private function getWinner(): Knight
     {
         foreach ($this->knights as $knight) {
             if ($knight->isAlive()) {
@@ -74,7 +89,6 @@ class Game
             }
         }
 
-        throw new Exception('No winner found');
+        throw new Exception('An exception occurred. server error');
     }
-
 }
