@@ -1,6 +1,6 @@
 <?php
 
-namespace Spreadgroups\Game;
+namespace App\Game;
 
 /**
  * Represents a knight in the game.

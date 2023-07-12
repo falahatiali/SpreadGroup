@@ -1,6 +1,6 @@
 <?php
 
-namespace Spreadgroups\Game;
+namespace App\Game;
 
 class Game
 {
