@@ -2,6 +2,8 @@
 
 namespace App\Game;
 
+use Exception;
+
 class Game
 {
     public function __construct(private array $knights = [])
@@ -26,40 +28,53 @@ class Game
      * the next knight in line to take damage by using the modulus operator.
      * It then rolls a random dice (1-6) and subtracts the rolled value
      * from the next knight's life points using the takeDamage() method.
+     * @throws Exception
      */
-    public function playGame(): void
+    public function playGame(): Knight
     {
-        while (count($this->knights) > 1) {
-            $aliveKnights = $this->getAliveKnights();
+        while ($this->isSingleAliveKnight() == false) {
 
-            foreach ($aliveKnights as $index => $currentKnight) {
-
+            foreach ($this->knights as $index => $currentKnight) {
                 // ensure that the index $nextIndex stays within the bounds of the $aliveKnights array.
-                $nextIndex = ($index + 1) % count($aliveKnights);
+                $nextIndex = ($index + 1) % count($this->knights);
 
-                $nextKnight = $aliveKnights[$nextIndex];
+                /** @var Knight $nextKnight */
+                $nextKnight = $this->knights[$nextIndex];
 
-                $diceRoll = random_int(1, 6);
-                $nextKnight->takeDamage($diceRoll);
+                if ($nextKnight->isAlive()) {
+                    $diceRoll = random_int(1, 6);
+                    $nextKnight->takeDamage($diceRoll);
 
-                if (!$nextKnight->isAlive()) {
-                    unset($aliveKnights[$nextIndex]);
-                    $aliveKnights = array_values($aliveKnights);
-                }
-
-                if (count($aliveKnights) === 1) {
-                    break; // Exit the loop if there is only one knight left
+                    if ($this->isSingleAliveKnight()){
+                        break;
+                    }
                 }
             }
-
-            $this->knights = $aliveKnights;
         }
+
+        return $this->getWinner();
     }
 
-
-
-    public function getWinner(): ?Knight
+    function isSingleAliveKnight(): bool
     {
-        return count($this->knights) === 1 ? $this->knights[0] : null;
+        $count = count(array_filter($this->knights, fn(Knight $knight) => $knight->isAlive()));
+
+        if ($count == 1) {
+            return true;
+        }
+
+        return false;
     }
+
+    function getWinner(): Knight
+    {
+        foreach ($this->knights as $knight) {
+            if ($knight->isAlive()) {
+                return $knight;
+            }
+        }
+
+        throw new Exception('No winner found');
+    }
+
 }
