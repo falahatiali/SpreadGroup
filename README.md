@@ -50,6 +50,6 @@ Our approach to solving the challenge is as follows:
 7. Run the following command to run the tests:
 
 ```bash
-   ./vendor/bin/phpunit
+   ./vendor/bin/phpunit tests
 ```
 ## Assumptions
