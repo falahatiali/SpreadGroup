@@ -51,10 +51,10 @@ class Game
                 if ($nextKnight->isAlive()) {
                     $diceRoll = random_int(1, 6);
                     $nextKnight->takeDamage($diceRoll);
+                }
 
-                    if ($this->isSingleAliveKnight()) {
-                        break;
-                    }
+                if ($this->isSingleAliveKnight()) {
+                    break;
                 }
             }
         }
