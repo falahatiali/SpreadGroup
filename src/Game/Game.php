@@ -59,7 +59,6 @@ class Game
             }
         }
 
-        print_r($this->knights);
         return $this->getWinner();
     }
 
