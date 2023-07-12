@@ -2,8 +2,8 @@
 
 require_once 'vendor/autoload.php';
 
-use Spreadgroups\Game\Game;
-use Spreadgroups\Game\Knight;
+use App\Game\Game;
+use App\Game\Knight;
 
 // Create a new game instance
 $game = new Game();
