@@ -46,6 +46,10 @@ class Game
                     unset($aliveKnights[$nextIndex]);
                     $aliveKnights = array_values($aliveKnights);
                 }
+
+                if (count($aliveKnights) === 1) {
+                    break; // Exit the loop if there is only one knight left
+                }
             }
 
             $this->knights = $aliveKnights;
