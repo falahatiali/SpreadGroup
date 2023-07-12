@@ -24,6 +24,14 @@ Our approach to solving the challenge is as follows:
 ```bash
    docker build -t spreadgroups .
 ```
+
+install the required dependencies by running the following command:
+
+```bash
+  docker run --rm -it -v $(pwd):/app spreadgroups composer install
+``
+
+```
    5. Run the following command to run the Docker container:
 
 ```bash
