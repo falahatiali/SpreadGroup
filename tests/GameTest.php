@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests;
 
 use App\Game\Game;
@@ -36,8 +37,9 @@ class GameTest extends TestCase
         $knight2 = new Knight(2, 100);
         $game->addKnight($knight1);
         $game->addKnight($knight2);
-        $game->playGame();
+        $winner = $game->playGame();
         $this->assertCount(1, $game->getAliveKnights());
+        $this->assertTrue($winner->isAlive());
 
         // Scenario 2: 5 knights
         $knight3 = new Knight(3, 100);
@@ -50,8 +52,9 @@ class GameTest extends TestCase
         $game->addKnight($knight5);
         $game->addKnight($knight6);
         $game->addKnight($knight7);
-        $game->playGame();
+        $winner = $game->playGame();
         $this->assertCount(1, $game->getAliveKnights());
+        $this->assertTrue($winner->isAlive());
 
         // Scenario 3: 10 knights
         $knights = [];
@@ -61,8 +64,9 @@ class GameTest extends TestCase
         foreach ($knights as $knight) {
             $game->addKnight($knight);
         }
-        $game->playGame();
+        $winner = $game->playGame();
         $this->assertCount(1, $game->getAliveKnights());
+        $this->assertTrue($winner->isAlive());
     }
 
     /**
@@ -81,12 +85,12 @@ class GameTest extends TestCase
         $game->addKnight($knight1);
         $game->addKnight($knight2);
         $game->addKnight($knight3);
-        $game->playGame();
+        $winner = $game->playGame();
 
-        $aliveKnights = $game->getAliveKnights();
-        $this->assertCount(1, $aliveKnights);
-        $this->assertInstanceOf(Knight::class, $aliveKnights[0]);
-
+        $aliveKnights = $game->isSingleAliveKnight();
+        $this->assertEquals(1, $aliveKnights);
+        $this->assertInstanceOf(Knight::class, $winner);
+        $this->assertTrue($winner->isAlive());
     }
 
     /** @test */
@@ -103,11 +107,11 @@ class GameTest extends TestCase
         foreach ($knights as $knight) {
             $game->addKnight($knight);
         }
-        $game->playGame();
+        $winner = $game->playGame();
 
-        $aliveKnights = $game->getAliveKnights();
-        $this->assertCount(1, $aliveKnights);
-        $this->assertInstanceOf(Knight::class, $aliveKnights[0]);
+        $aliveKnights = $game->isSingleAliveKnight();
+        $this->assertEquals(1, $aliveKnights);
+        $this->assertInstanceOf(Knight::class, $winner);
+        $this->assertTrue($winner->isAlive());
     }
-
 }
